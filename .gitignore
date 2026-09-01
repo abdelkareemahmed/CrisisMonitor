@@ -1,0 +1,21 @@
+# 1. البيئة الوهمية والملفات السرية (ممنوع تترفع)
+venv/
+.env
+*.session
+
+# 2. أوزان الموديلات الضخمة وسجلات التدريب
+ml_model/model/
+ml_model/model_v2/
+mlruns/
+mlflow.db
+
+# 3. ملفات الـ Data وذاكرة Spark
+checkpoints/
+*.csv
+*.jsonl
+*.log
+
+# 4. ملفات بايثون المؤقتة (ملهاش لازمة)
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

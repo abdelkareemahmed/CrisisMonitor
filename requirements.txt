@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+streamlit
+pandas
+pyspark
+kafka-python
+mlflow
+transformers
+torch
+accelerate
+datasets
+python-dotenv
+requests
