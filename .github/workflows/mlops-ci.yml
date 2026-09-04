@@ -1,0 +1,35 @@
+name: CrisisMonitor CI/CD Pipeline
+
+# إمتى الـ Pipeline ده يشتغل؟ (لما نعمل Push على فرع main)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest # السيرفر الوهمي اللي هيشتغل عليه
+
+    steps:
+    # 1. سحب الكود من المستودع
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v3
+
+    # 2. تسطيب بايثون
+    - name: 🐍 Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    # 3. تسطيب المكتبات الأساسية
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # 4. بناء بيئة الدوكر الخاصة بالـ API
+    - name: 🐳 Build API Docker Image
+      run: |
+        cd api
+        docker build -t crisismonitor-api:latest .
