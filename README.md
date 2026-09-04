@@ -14,10 +14,10 @@ The pipeline follows the **Medallion Architecture** (Bronze, Silver, Gold) integ
 5. **Dashboard:** Live monitoring interface built with **Streamlit**.
 
 ## 🛠️ Tech Stack
-* **Data Engineering:** Apache Kafka, Apache Spark (PySpark), Azure Data Lake Storage Gen2 (abfss).
-* **MLOps:** MLflow, Transformers (Hugging Face), FastAPI.
-* **Orchestration & DevOps:** Apache Airflow, Docker, Docker Compose.
-* **Frontend:** Streamlit.
+* **Data Engineering:** Apache Kafka, Apache Spark (PySpark), Azure Data Lake Storage Gen2 (abfss)
+* **MLOps:** MLflow, Transformers (Hugging Face), FastAPI
+* **Orchestration & DevOps:** Apache Airflow, Docker, Docker Compose
+* **Frontend:** Streamlit
 
 ## 📂 Project Structure
 
@@ -36,3 +36,28 @@ CrisisMonitor-MLOps/
 ├── dashboard.py             # Streamlit live monitoring dashboard
 ├── retrain_model.py         # Automated model retraining script
 └── docker-compose.yml       # Infrastructure orchestration
+```
+
+## 🚀 Key Features
+
+* **Real-time Alerting:** Spark Streaming pushes live articles through the FastAPI inference endpoint, instantly logging critical crises.
+* **Medallion Data Lake:** Batch processing cleans data (Bronze), stores all inferences (Silver), and filters verified disasters (Gold) on Azure.
+* **Continuous Training (CT):** Automated scripts to fine-tune the model on new data, logging parameters, metrics, and artifacts into MLflow.
+* **Secure & Scalable:** Environment variables protect cloud keys, and Docker ensures reproducible environments.
+
+## ⚙️ How to Run (Locally)
+
+1. Clone the repository.
+2. Add your `.env` file containing `AZURE_ACCESS_KEY` and API keys.
+3. Start the infrastructure (Kafka, Zookeeper) via Docker:
+   ```bash
+   docker-compose up -d
+   ```
+4. Run the Model API:
+   ```bash
+   cd api && uvicorn model_api:app --reload
+   ```
+5. Start the Live Dashboard:
+   ```bash
+   streamlit run dashboard.py
+   ```
